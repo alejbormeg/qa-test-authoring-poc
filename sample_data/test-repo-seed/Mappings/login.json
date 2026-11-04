@@ -1,0 +1,6 @@
+{
+  "usuario": { "selector": "[data-testid=login-usuario]", "tipo": "input", "descripcion": "Campo correo electrónico del usuario" },
+  "password": { "selector": "[data-testid=login-password]", "tipo": "input", "descripcion": "Campo contraseña" },
+  "entrar": { "selector": "[data-testid=login-entrar]", "tipo": "button", "descripcion": "Botón Entrar" },
+  "error": { "selector": "[data-testid=login-error]", "tipo": "text", "descripcion": "Mensaje de error del login" }
+}

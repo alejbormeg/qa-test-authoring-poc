@@ -1,0 +1,9 @@
+{
+  "buscador": { "selector": "[data-testid=cabecera-buscador-input]", "tipo": "input", "descripcion": "Campo de búsqueda de productos de la cabecera" },
+  "buscar": { "selector": "[data-testid=cabecera-buscador-boton]", "tipo": "button", "descripcion": "Botón Buscar de la cabecera" },
+  "carrito": { "selector": "[data-testid=cabecera-carrito-enlace]", "tipo": "link", "descripcion": "Enlace al carrito" },
+  "contador_carrito": { "selector": "[data-testid=cabecera-carrito-contador]", "tipo": "text", "descripcion": "Contador de unidades del carrito" },
+  "usuario": { "selector": "[data-testid=cabecera-usuario]", "tipo": "link", "descripcion": "Nombre del usuario con sesión iniciada" },
+  "iniciar_sesion": { "selector": "[data-testid=cabecera-login-enlace]", "tipo": "link", "descripcion": "Enlace Iniciar sesión" },
+  "salir": { "selector": "[data-testid=cabecera-logout]", "tipo": "button", "descripcion": "Botón Salir (cerrar sesión)" }
+}

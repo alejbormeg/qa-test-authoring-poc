@@ -1,0 +1,31 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Producto · Tienda demo</title><link rel="stylesheet" href="/static/tienda.css"><script src="/static/tienda.js"></script></head><body>
+<main>
+  <div class="panel" id="ficha">
+    <h1 data-testid="producto-nombre" id="nombre"></h1>
+    <p class="precio" data-testid="producto-precio" id="precio"></p>
+    <p class="aviso oculto" data-testid="producto-aviso-stock" id="stock" role="status"></p>
+    <div class="fila">
+      <label for="cant">Cantidad</label>
+      <input id="cant" type="number" min="1" value="1" style="width:90px" data-testid="producto-cantidad">
+      <button data-testid="producto-anadir" id="anadir">Añadir al carrito</button>
+    </div>
+    <p class="ok oculto" data-testid="producto-mensaje" id="msg" role="status"></p>
+  </div>
+</main>
+<script>
+  const p = producto(new URLSearchParams(location.search).get("id")) || PRODUCTOS[0];
+  document.getElementById("nombre").textContent = p.nombre;
+  document.getElementById("precio").textContent = euros(p.precio);
+  const stock = document.getElementById("stock");
+  if (p.stock === 0) { stock.textContent = "Producto agotado"; stock.classList.remove("oculto"); document.getElementById("anadir").disabled = true; }
+  else if (p.stock <= STOCK_BAJO) { stock.textContent = "¡Últimas " + p.stock + " unidades!"; stock.classList.remove("oculto"); }
+  document.getElementById("anadir").onclick = () => {
+    const n = Math.max(1, parseInt(document.getElementById("cant").value || "1", 10));
+    const msg = document.getElementById("msg");
+    if (n > p.stock) { msg.className = "error"; msg.textContent = "Solo quedan " + p.stock + " unidades"; return; }
+    anadirAlCarrito(p.id, n);
+    msg.className = "ok"; msg.textContent = "Producto añadido al carrito";
+    document.querySelector("[data-testid=cabecera-carrito-contador]").textContent = carrito().reduce((s, l) => s + l.cantidad, 0);
+  };
+</script>
+</body></html>

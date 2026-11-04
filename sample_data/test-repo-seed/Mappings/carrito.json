@@ -1,0 +1,9 @@
+{
+  "lineas": { "selector": "[data-testid=carrito-linea]", "tipo": "list", "descripcion": "Líneas del carrito" },
+  "nombre_linea": { "selector": "[data-testid=carrito-linea-nombre]", "tipo": "text", "descripcion": "Nombre del producto en la línea del carrito" },
+  "eliminar": { "selector": "[data-testid=carrito-linea-eliminar]", "tipo": "button", "descripcion": "Botón Eliminar línea" },
+  "subtotal": { "selector": "[data-testid=carrito-subtotal]", "tipo": "text", "descripcion": "Subtotal del carrito" },
+  "total": { "selector": "[data-testid=carrito-total]", "tipo": "text", "descripcion": "Total del carrito" },
+  "vacio": { "selector": "[data-testid=carrito-vacio]", "tipo": "text", "descripcion": "Mensaje carrito vacío" },
+  "tramitar": { "selector": "[data-testid=carrito-tramitar]", "tipo": "button", "descripcion": "Botón Tramitar pedido" }
+}

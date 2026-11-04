@@ -1,0 +1,9 @@
+{
+  "titulo": { "selector": "[data-testid=catalogo-titulo]", "tipo": "text", "descripcion": "Título del catálogo" },
+  "categoria": { "selector": "[data-testid=catalogo-filtro-categoria]", "tipo": "select", "descripcion": "Filtro de categoría" },
+  "contador": { "selector": "[data-testid=catalogo-contador-resultados]", "tipo": "text", "descripcion": "Contador de resultados del catálogo" },
+  "productos": { "selector": "[data-testid=catalogo-producto]", "tipo": "list", "descripcion": "Tarjetas de producto del listado" },
+  "nombre_producto": { "selector": "[data-testid=catalogo-producto-nombre]", "tipo": "link", "descripcion": "Nombre del producto en el listado" },
+  "anadir": { "selector": "[data-testid=catalogo-producto-anadir]", "tipo": "button", "descripcion": "Botón Añadir al carrito del listado" },
+  "sin_resultados": { "selector": "[data-testid=catalogo-sin-resultados]", "tipo": "text", "descripcion": "Mensaje sin resultados de búsqueda" }
+}

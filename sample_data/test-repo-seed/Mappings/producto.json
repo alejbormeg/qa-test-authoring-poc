@@ -1,0 +1,7 @@
+{
+  "nombre": { "selector": "[data-testid=producto-nombre]", "tipo": "text", "descripcion": "Nombre del producto" },
+  "precio": { "selector": "[data-testid=producto-precio]", "tipo": "text", "descripcion": "Precio del producto" },
+  "cantidad": { "selector": "[data-testid=producto-cantidad]", "tipo": "input", "descripcion": "Campo cantidad" },
+  "anadir": { "selector": "[data-testid=producto-anadir]", "tipo": "button", "descripcion": "Botón Añadir al carrito" },
+  "mensaje": { "selector": "[data-testid=producto-mensaje]", "tipo": "text", "descripcion": "Mensaje de confirmación o error al añadir" }
+}

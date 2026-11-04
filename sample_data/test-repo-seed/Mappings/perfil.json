@@ -1,0 +1,4 @@
+{
+  "nombre": { "selector": "[data-testid=perfil-nombre]", "tipo": "text", "descripcion": "Nombre del usuario en su perfil" },
+  "email": { "selector": "[data-testid=perfil-email]", "tipo": "text", "descripcion": "Correo del usuario en su perfil" }
+}

@@ -1,0 +1,8 @@
+{
+  "catalogo": "/",
+  "login": "/login",
+  "producto": "/producto",
+  "carrito": "/carrito",
+  "checkout": "/checkout",
+  "perfil": "/perfil"
+}

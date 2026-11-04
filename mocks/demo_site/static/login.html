@@ -1,0 +1,22 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Iniciar sesión · Tienda demo</title><link rel="stylesheet" href="/static/tienda.css"><script src="/static/tienda.js"></script></head><body>
+<main>
+  <div class="panel">
+    <h1 data-testid="login-titulo">Iniciar sesión</h1>
+    <form id="f">
+      <div class="campo"><label for="u">Correo electrónico</label><input id="u" type="email" data-testid="login-usuario" autocomplete="username"></div>
+      <div class="campo"><label for="p">Contraseña</label><input id="p" type="password" data-testid="login-password" autocomplete="current-password"></div>
+      <p class="error oculto" id="err" data-testid="login-error" role="alert"></p>
+      <button type="submit" data-testid="login-entrar">Entrar</button>
+    </form>
+  </div>
+</main>
+<script>
+  document.getElementById("f").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const err = login(document.getElementById("u").value, document.getElementById("p").value);
+    const box = document.getElementById("err");
+    if (err) { box.textContent = err; box.classList.remove("oculto"); return; }
+    location.href = new URLSearchParams(location.search).get("volver") || "/perfil";
+  });
+</script>
+</body></html>

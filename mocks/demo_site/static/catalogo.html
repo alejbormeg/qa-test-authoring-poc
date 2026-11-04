@@ -1,0 +1,35 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Catálogo · Tienda demo</title><link rel="stylesheet" href="/static/tienda.css"><script src="/static/tienda.js"></script></head><body>
+<main>
+  <h1 data-testid="catalogo-titulo">Catálogo</h1>
+  <div class="filtros">
+    <label for="cat">Categoría</label>
+    <select id="cat" data-testid="catalogo-filtro-categoria" aria-label="Filtrar por categoría">
+      <option value="">Todas</option><option value="audio">Audio</option>
+      <option value="informatica">Informática</option><option value="hogar">Hogar</option>
+    </select>
+    <span data-testid="catalogo-contador-resultados" id="contador"></span>
+  </div>
+  <div class="rejilla" id="rejilla" data-testid="catalogo-listado"></div>
+  <p class="aviso oculto" id="vacio" data-testid="catalogo-sin-resultados">No hay productos que coincidan con la búsqueda</p>
+</main>
+<script>
+  const params = new URLSearchParams(location.search);
+  const sel = document.getElementById("cat");
+  sel.value = params.get("categoria") || "";
+  function pintar() {
+    const q = (params.get("q") || "").toLowerCase();
+    const lista = PRODUCTOS.filter(p => (!q || p.nombre.toLowerCase().includes(q)) && (!sel.value || p.categoria === sel.value));
+    document.getElementById("rejilla").innerHTML = lista.map(p => `
+      <div class="tarjeta" data-testid="catalogo-producto">
+        <a href="/producto?id=${p.id}" data-testid="catalogo-producto-nombre">${p.nombre}</a>
+        <span class="precio" data-testid="catalogo-producto-precio">${euros(p.precio)}</span>
+        <button data-testid="catalogo-producto-anadir" data-id="${p.id}" ${p.stock ? "" : "disabled"}>${p.stock ? "Añadir al carrito" : "Agotado"}</button>
+      </div>`).join("");
+    document.getElementById("contador").textContent = lista.length + " productos";
+    document.getElementById("vacio").classList.toggle("oculto", lista.length > 0);
+    document.querySelectorAll("[data-testid=catalogo-producto-anadir]").forEach(b => b.onclick = () => { anadirAlCarrito(b.dataset.id); location.reload(); });
+  }
+  sel.onchange = () => { params.set("categoria", sel.value); history.replaceState(null, "", "?" + params); pintar(); };
+  document.addEventListener("DOMContentLoaded", () => { document.querySelector("[data-testid=cabecera-buscador-input]").value = params.get("q") || ""; pintar(); });
+</script>
+</body></html>

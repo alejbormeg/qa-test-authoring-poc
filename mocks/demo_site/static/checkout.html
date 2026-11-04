@@ -1,0 +1,40 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Finalizar compra · Tienda demo</title><link rel="stylesheet" href="/static/tienda.css"><script src="/static/tienda.js"></script></head><body>
+<main>
+  <div class="panel" id="form-panel">
+    <h1 data-testid="checkout-titulo">Datos de envío</h1>
+    <div class="campo"><label for="n">Nombre completo</label><input id="n" data-testid="checkout-nombre"></div>
+    <div class="campo"><label for="d">Dirección</label><input id="d" data-testid="checkout-direccion"></div>
+    <div class="campo"><label for="cp">Código postal</label><input id="cp" data-testid="checkout-cp" maxlength="5"></div>
+    <div class="campo"><label for="pago">Método de pago</label>
+      <select id="pago" data-testid="checkout-pago"><option value="">Selecciona…</option><option value="tarjeta">Tarjeta</option><option value="transferencia">Transferencia</option><option value="contrareembolso">Contra reembolso</option></select></div>
+    <p class="error oculto" id="err" data-testid="checkout-error" role="alert"></p>
+    <p>Total a pagar: <b data-testid="checkout-total" id="total"></b></p>
+    <button data-testid="checkout-confirmar" id="confirmar">Confirmar pedido</button>
+  </div>
+  <div class="panel oculto" id="hecho">
+    <h1>¡Gracias por tu compra!</h1>
+    <p class="ok" data-testid="checkout-confirmacion" id="conf"></p>
+    <a href="/perfil" data-testid="checkout-ver-pedidos">Ver mis pedidos</a>
+  </div>
+</main>
+<script>
+  if (!sesion()) location.replace("/login?volver=/checkout");
+  if (carrito().length === 0) location.replace("/carrito");
+  document.getElementById("total").textContent = euros(totales().total);
+  document.getElementById("confirmar").onclick = () => {
+    const v = (id) => document.getElementById(id).value.trim();
+    const err = document.getElementById("err");
+    let problema = null;
+    if (!v("n") || !v("d")) problema = "Completa el nombre y la dirección";
+    else if (!/^\d{5}$/.test(v("cp"))) problema = "El código postal debe tener 5 dígitos";
+    else if (!v("pago")) problema = "Selecciona un método de pago";
+    if (problema) { err.textContent = problema; err.classList.remove("oculto"); return; }
+    const pedidos = leer("pedidos", []);
+    const num = "PED-" + String(1000 + pedidos.length + 1);
+    pedidos.push({ num, total: totales().total, fecha: new Date().toISOString().slice(0, 10) });
+    guardar("pedidos", pedidos); localStorage.removeItem("carrito"); localStorage.removeItem("cupon");
+    document.getElementById("conf").textContent = "Pedido " + num + " confirmado";
+    document.getElementById("form-panel").classList.add("oculto"); document.getElementById("hecho").classList.remove("oculto");
+  };
+</script>
+</body></html>

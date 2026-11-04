@@ -1,0 +1,10 @@
+{
+  "nombre": { "selector": "[data-testid=checkout-nombre]", "tipo": "input", "descripcion": "Campo nombre completo" },
+  "direccion": { "selector": "[data-testid=checkout-direccion]", "tipo": "input", "descripcion": "Campo dirección" },
+  "codigo_postal": { "selector": "[data-testid=checkout-cp]", "tipo": "input", "descripcion": "Campo código postal" },
+  "pago": { "selector": "[data-testid=checkout-pago]", "tipo": "select", "descripcion": "Selector método de pago" },
+  "total": { "selector": "[data-testid=checkout-total]", "tipo": "text", "descripcion": "Total a pagar" },
+  "confirmar": { "selector": "[data-testid=checkout-confirmar]", "tipo": "button", "descripcion": "Botón Confirmar pedido" },
+  "error": { "selector": "[data-testid=checkout-error]", "tipo": "text", "descripcion": "Mensaje de error del formulario" },
+  "confirmacion": { "selector": "[data-testid=checkout-confirmacion]", "tipo": "text", "descripcion": "Mensaje de pedido confirmado" }
+}

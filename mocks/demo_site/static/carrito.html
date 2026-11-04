@@ -1,0 +1,47 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Carrito · Tienda demo</title><link rel="stylesheet" href="/static/tienda.css"><script src="/static/tienda.js"></script></head><body>
+<main>
+  <h1 data-testid="carrito-titulo">Tu carrito</h1>
+  <p class="aviso oculto" id="vacio" data-testid="carrito-vacio">Tu carrito está vacío</p>
+  <div id="contenido">
+    <table><thead><tr><th>Producto</th><th>Cantidad</th><th>Importe</th><th></th></tr></thead><tbody id="lineas"></tbody></table>
+    <div class="fila" style="margin-top:18px">
+      <input id="cupon" placeholder="Código de cupón" aria-label="Código de cupón" data-testid="carrito-cupon-input">
+      <button class="secundario" id="aplicar" data-testid="carrito-cupon-aplicar">Aplicar cupón</button>
+      <span id="cupon-msg" data-testid="carrito-cupon-mensaje" role="status"></span>
+    </div>
+    <div class="resumen">
+      <span>Subtotal: <b data-testid="carrito-subtotal" id="subtotal"></b></span>
+      <span class="oculto" id="fila-desc">Descuento: <b data-testid="carrito-descuento" id="descuento"></b></span>
+      <span style="font-size:20px">Total: <b data-testid="carrito-total" id="total"></b></span>
+      <button data-testid="carrito-tramitar" id="tramitar">Tramitar pedido</button>
+    </div>
+  </div>
+</main>
+<script>
+  function pintar() {
+    const c = carrito();
+    document.getElementById("vacio").classList.toggle("oculto", c.length > 0);
+    document.getElementById("contenido").classList.toggle("oculto", c.length === 0);
+    document.getElementById("lineas").innerHTML = c.map(l => { const p = producto(l.id); return `
+      <tr data-testid="carrito-linea"><td data-testid="carrito-linea-nombre">${p.nombre}</td><td>${l.cantidad}</td>
+      <td>${euros(p.precio * l.cantidad)}</td>
+      <td><button class="secundario" data-testid="carrito-linea-eliminar" data-id="${l.id}">Eliminar</button></td></tr>`; }).join("");
+    document.querySelectorAll("[data-testid=carrito-linea-eliminar]").forEach(b => b.onclick = () => {
+      guardar("carrito", carrito().filter(l => l.id !== Number(b.dataset.id))); location.reload(); });
+    const t = totales();
+    document.getElementById("subtotal").textContent = euros(t.subtotal);
+    document.getElementById("total").textContent = euros(t.total);
+    document.getElementById("fila-desc").classList.toggle("oculto", !t.pct);
+    document.getElementById("descuento").textContent = "-" + euros(t.descuento);
+  }
+  document.getElementById("aplicar").onclick = () => {
+    const code = document.getElementById("cupon").value.trim().toUpperCase();
+    const msg = document.getElementById("cupon-msg");
+    if (CUPONES[code]) { guardar("cupon", code); msg.className = "ok"; msg.textContent = "Cupón aplicado: " + CUPONES[code] + "% de descuento"; }
+    else { localStorage.removeItem("cupon"); msg.className = "error"; msg.textContent = "El cupón no es válido"; }
+    pintar();
+  };
+  document.getElementById("tramitar").onclick = () => { location.href = sesion() ? "/checkout" : "/login?volver=/checkout"; };
+  pintar();
+</script>
+</body></html>

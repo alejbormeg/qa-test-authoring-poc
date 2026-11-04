@@ -1,0 +1,23 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Mi cuenta · Tienda demo</title><link rel="stylesheet" href="/static/tienda.css"><script src="/static/tienda.js"></script></head><body>
+<main>
+  <div class="panel">
+    <h1>Mi cuenta</h1>
+    <p>Nombre: <b data-testid="perfil-nombre" id="nombre"></b></p>
+    <p>Correo: <b data-testid="perfil-email" id="email"></b></p>
+    <h2 style="font-size:18px">Mis pedidos</h2>
+    <ul data-testid="perfil-pedidos" id="pedidos"></ul>
+    <p class="aviso oculto" data-testid="perfil-sin-pedidos" id="sin">Todavía no has hecho ningún pedido</p>
+  </div>
+</main>
+<script>
+  const s = sesion();
+  if (!s) location.replace("/login?volver=/perfil");
+  else {
+    document.getElementById("nombre").textContent = s.nombre;
+    document.getElementById("email").textContent = s.email;
+    const p = leer("pedidos", []);
+    document.getElementById("pedidos").innerHTML = p.map(x => `<li data-testid="perfil-pedido">${x.num} · ${x.fecha} · ${euros(x.total)}</li>`).join("");
+    document.getElementById("sin").classList.toggle("oculto", p.length > 0);
+  }
+</script>
+</body></html>
