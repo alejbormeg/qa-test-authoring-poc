@@ -129,3 +129,7 @@ docs/               arquitectura, guion de la demo y requisitos
 - No hay autenticación: el usuario (analista o QA Lead) se elige en la cabecera.
 - Solo web. Appium para móvil reutilizaría el flujo, las herramientas y el registro; cambiarían el ejecutor y el inspector.
 - El formato de los mapeos de componentes es el de la solución de ejemplo.
+
+## Licencia
+
+[MIT](LICENSE)

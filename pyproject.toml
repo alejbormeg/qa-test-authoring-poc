@@ -3,6 +3,8 @@ name = "qa-test-authoring-poc"
 version = "0.1.0"
 description = "PoC: asistente de QA que convierte un documento de casos de prueba en tests Playwright revisados y registrados en Azure DevOps."
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
 requires-python = ">=3.12"
 dependencies = [
     "nicegui>=2.20,<4",
