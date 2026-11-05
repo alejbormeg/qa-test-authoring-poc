@@ -41,11 +41,11 @@ def frame(active: str) -> None:
             ui.label(f"{settings.azure_org} / {settings.azure_project} · API compatible con Azure DevOps 7.1").classes(
                 "text-xs text-slate-300")
         ui.space()
-        for key, label, icon, target in [("boards", "Boards", "view_kanban", "/console"),
-                                         ("plans", "Test Plans", "science", "/console/plans"),
-                                         ("repos", "Pull requests", "merge", "/console/prs"),
-                                         ("activity", "Actividad", "history", "/console/activity"),
-                                         ("faults", "Fallos", "bolt", "/console/faults")]:
+        for key, label, icon, target in [("boards", "Boards", "view_kanban", "/"),
+                                         ("plans", "Test Plans", "science", "/plans"),
+                                         ("repos", "Pull requests", "merge", "/prs"),
+                                         ("activity", "Actividad", "history", "/activity"),
+                                         ("faults", "Fallos", "bolt", "/faults")]:
             color = "white" if key == active else "blue-grey-3"
             btn = ui.button(label, icon=icon, on_click=lambda t=target: ui.navigate.to(t)).props(f"flat no-caps color={color}")
             if key == active:
@@ -191,7 +191,7 @@ def install() -> None:
                 for pr in prs:
                     label, color = PR_STATUS[pr["status"]]
                     with ui.card().classes("w-full cursor-pointer hover:shadow-md").on(
-                            "click", lambda p=pr["pullRequestId"]: ui.navigate.to(f"/console/pr/{p}")):
+                            "click", lambda p=pr["pullRequestId"]: ui.navigate.to(f"/pr/{p}")):
                         with ui.row().classes("items-center gap-3 w-full"):
                             ui.icon("merge", color=color, size="md")
                             with ui.column().classes("gap-0 flex-1"):
@@ -221,7 +221,7 @@ def install() -> None:
             label, color = PR_STATUS[pr["status"]]
             branch = pr["sourceRefName"].removeprefix("refs/heads/")
             with ui.column().classes("w-full max-w-6xl mx-auto p-6 gap-4"):
-                ui.link("← Pull requests", "/console/prs").classes("text-sm")
+                ui.link("← Pull requests", "/prs").classes("text-sm")
                 with ui.row().classes("items-center gap-3 w-full"):
                     ui.badge(label, color=color).classes("text-sm")
                     ui.label(f"!{pid} {pr['title']}").classes("text-2xl font-semibold flex-1")

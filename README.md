@@ -52,6 +52,7 @@ Con IA real: copia `.env.example` a `.env`, pon `ANTHROPIC_API_KEY` y `QA_AI=cla
 make test          # tests unitarios y de contrato (levantan su propio Azure simulado)
 make demo-e2e      # recorre el flujo entero sin UI y comprueba Azure (con `make up` en marcha)
 make screenshots   # capturas de las pantallas en docs/capturas
+make video         # vídeo de la demo recorriendo la app (docs/video, fuera de git)
 make dff           # regenera los DFF de ejemplo
 ```
 

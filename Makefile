@@ -2,7 +2,7 @@ UV ?= $(shell command -v uv || echo $(HOME)/.local/bin/uv)
 PY := .venv/bin/python
 DOTNET ?= $(shell [ -x $(HOME)/.dotnet/dotnet ] && echo $(HOME)/.dotnet/dotnet || command -v dotnet)
 
-.PHONY: setup seed up test demo-e2e screenshots dff check-dotnet
+.PHONY: setup seed up test demo-e2e screenshots video dff check-dotnet
 
 setup: check-dotnet ## Dependencias Python, navegador de Playwright y paquetes NuGet del proyecto de tests
 	$(UV) sync
@@ -27,6 +27,9 @@ demo-e2e: ## Recorre el flujo completo sin UI (con `make up` en otra terminal)
 
 screenshots: ## Capturas de las pantallas en docs/capturas (con `make up` en marcha)
 	$(PY) scripts/screenshots.py
+
+video: ## Vídeo de la demo en docs/video (con `make up` en marcha sobre un `make seed` reciente)
+	$(UV) run --with imageio-ffmpeg python scripts/record_demo.py
 
 dff: ## Regenera los DFF de ejemplo
 	$(PY) sample_data/dff/build_dff.py
