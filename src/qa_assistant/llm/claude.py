@@ -57,7 +57,7 @@ class ClaudeLlm:
         system = (PROMPTS / "extraccion.md").read_text(encoding="utf-8")
         resp = self.client.messages.parse(
             model=self.model,
-            max_tokens=32000,
+            max_tokens=16000,
             system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
             messages=[{"role": "user", "content": f"<documento nombre=\"{dff_name}\">\n{text}\n</documento>"}],
             output_format=Extraccion,
@@ -156,7 +156,7 @@ class ClaudeLlm:
                        "resultado esperado del caso para que pase: si la web no cumple el caso, déjalo y explícalo.")
 
         usage: Usage = {}
-        params = dict(model=self.model, max_tokens=32000, system=system, max_iterations=24,
+        params = dict(model=self.model, max_tokens=16000, system=system, max_iterations=24,
                       tools=[leer_fichero, inspeccionar_pagina, proponer_componente, escribir_test],
                       messages=[{"role": "user", "content": prompt}], output_config={"effort": "high"})
         if settings.claude_fallbacks:

@@ -1,6 +1,6 @@
 """Recorre el flujo completo sin UI y comprueba el resultado (requiere `make up` o los servicios arrancados).
 
-1. Sube el DFF del carrito, espera la extracción y aprueba los casos sin avisos (Gate 1).
+1. Sube el DFF del carrito, espera la extracción y aprueba los casos pendientes (Gate 1).
 2. Espera la generación y ejecución; aparta los que no estén en verde y aprueba la revisión (Gate 2).
 3. Aprueba y completa la PR en Azure Repos como qa.lead.
 4. Confirma el registro (Gate 3) y comprueba en Azure que los Test Cases están en la suite con su automatización.
@@ -57,7 +57,8 @@ def main() -> None:
     for c in store.cases(run.id):
         print(f"  {c.ext_id:16} {c.status:10} {c.title}  {'⚠ ' + '; '.join(c.warnings) if c.warnings else ''}")
         if c.status == CaseStatus.PENDIENTE:
-            service.set_case_status(c.id, CaseStatus.DESCARTADO if c.warnings else CaseStatus.APROBADO, USER)
+            # Los avisos son para QA; los casos que no salgan en verde se apartan en el Gate 2.
+            service.set_case_status(c.id, CaseStatus.APROBADO, USER)
 
     step("GATE 1 · aprobar casos")
     service.approve_cases(run.id, USER)
