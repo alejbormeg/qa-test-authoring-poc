@@ -1,8 +1,8 @@
-# Trazabilidad con la propuesta
+# Requisitos y dónde se ven
 
-Cada punto de la propuesta enviada al cliente y dónde se ve en la PoC.
+Lo que tiene que cumplir el asistente y dónde está resuelto en la PoC.
 
-| Propuesta | En la PoC |
+| Requisito | En la PoC |
 |---|---|
 | El input es un DFF con los casos a probar | Subida de `.docx` (tabla o prosa), `.md` o `.txt` · `adapters/dff.py`, `llm/*` |
 | QA revisa y aprueba los casos extraídos | Gate 1 · edición de cada caso, avisos, duplicados contra Azure · `ui/run_page.py` (`gate1`) |
@@ -16,4 +16,4 @@ Cada punto de la propuesta enviada al cliente y dónde se ve en la PoC.
 | Informe de cierre: tiempo, aceptados sin cambios, mapeos reutilizados y nuevos | Dashboard · `ui/dashboard.py` |
 | Restricciones sobre el modelo de IA | Adaptador conmutable (`QA_AI`); la IA va detrás de un puerto (`extract`/`generate`) |
 
-Fuera de la PoC: Appium para móvil (el toolbox y el registro son los mismos; cambian el runner y el inspector), el formato real de sus mapeos (aislado en `Workspace.mapping`/`format_mapping`) y la conexión a su Azure DevOps (`AZURE_BASE_URL`, `AZURE_PAT`).
+Fuera de la PoC: Appium para móvil (el toolbox y el registro son los mismos; cambian el runner y el inspector), otros formatos de mapeo (aislados en `Workspace.mapping`/`format_mapping`) y la conexión a un Azure DevOps real (`AZURE_BASE_URL`, `AZURE_PAT`).

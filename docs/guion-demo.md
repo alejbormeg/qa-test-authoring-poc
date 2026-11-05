@@ -106,12 +106,12 @@ Unos 80 segundos. Ve leyendo la actividad:
 
 - **Dashboard**: tests registrados, en verde a la primera, aceptados sin cambios, coste de IA por test (unos 8 céntimos) y el tiempo de cada fase del asistente frente al de QA. La línea base (minutos por caso hoy) la pone el equipo; el resto se mide.
 
-> «Esto es lo que mediríamos en la prueba con sus DFF reales: tiempo por caso, cuánto se acepta sin tocar y cuánto cuesta.»
+> «Esto es lo que se mediría con DFF reales: tiempo por caso, cuánto se acepta sin tocar y cuánto cuesta.»
 
 ## 9. Cierre (1 min)
 
 - Otro formato de DFF: abre la ejecución del checkout preparada. El documento está en prosa; los tres tests salieron en verde a la primera y reutilizan siete componentes mapeados sin proponer ninguno nuevo.
-- Qué cambia para llevarlo a su entorno: el formato real de sus mapeos (aislado en un adaptador), la URL y el PAT de su Azure DevOps y sus proyectos de test. Appium para móvil es el siguiente paso: cambian el ejecutor y el inspector, y el flujo y el registro son los mismos.
+- Qué cambia para llevarlo a un entorno real: el formato de mapeos del equipo (aislado en un adaptador), la URL y el PAT de Azure DevOps y los proyectos de test. Appium para móvil es el siguiente paso: cambian el ejecutor y el inspector, y el flujo y el registro son los mismos.
 
 ## Variante: un DFF en borrador (si hay tiempo o preguntan «¿y si el DFF está mal?»)
 
@@ -135,7 +135,7 @@ Unos 80 segundos. Ve leyendo la actividad:
 ## Preguntas que suelen salir
 
 - **¿Cuánto cuesta?** Unos 7-8 céntimos de dólar por test con el modelo más capaz, gracias a la caché del contexto del repositorio. Un DFF de 20 casos, menos de 2 $.
-- **¿A dónde van los documentos?** A la API del modelo, solo lo necesario: el DFF, los mapeos y los page objects. Se puede usar sin retención de datos o a través de su nube; el modelo va detrás de un adaptador y se puede cambiar.
+- **¿A dónde van los documentos?** A la API del modelo, solo lo necesario: el DFF, los mapeos y los page objects. Se puede usar sin retención de datos o a través de un proveedor de nube; el modelo va detrás de un adaptador y se puede cambiar.
 - **¿Y si genera un test malo?** No llega a `main` sin pasar por QA (Gate 2) y por la PR del equipo. Además, no se acepta si no compila, si usa selectores sueltos o si propone un componente que no está en la página.
 - **¿Usa nuestros mapeos?** Sí, y propone los que faltan en el mismo formato, una entrada por línea, para que el diff de la PR sea legible.
 - **¿Qué hace QA entonces?** Lo que aporta valor: revisar los casos, decidir qué se automatiza, revisar el código y aprobar. Escribir el código repetitivo y dar de alta en Azure lo hace el asistente.
